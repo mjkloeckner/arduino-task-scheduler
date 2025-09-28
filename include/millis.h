@@ -7,8 +7,8 @@ extern "C" {
 
 #include <stdint.h>
 
-void timer_init(void);
-void timer_add_callback(void (*func_ptr)(void));
+void millis_init(void);
+uint32_t millis(void);
 
 #ifdef __cplusplus
 }

@@ -11,6 +11,7 @@ typedef struct {
 } task_t;
 
 typedef struct {
+    uint32_t t_ms_dt;
     uint8_t task_cnt;
     task_t tasks[SCHEDULER_MAX_TASKS_CNT];
 } scheduler_t;
@@ -19,10 +20,17 @@ static scheduler_t scheduler = {0};
 
 void scheduler_init(void) {
     scheduler.task_cnt = 0;
+    scheduler.t_ms_dt = 0;
 }
 
-// should be called exactly every ms
-void scheduler_update(void) {
+// update every 1 ms
+void scheduler_update(uint32_t t_ms) {
+    if ((t_ms - scheduler.t_ms_dt) < 1) {
+        return;
+    }
+
+    scheduler.t_ms_dt = t_ms;
+
     for (uint8_t i = 0; i < scheduler.task_cnt; ++i) {
         if (scheduler.tasks[i].ticks > 0) {
             scheduler.tasks[i].ticks--;
