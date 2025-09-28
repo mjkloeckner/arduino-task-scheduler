@@ -11,27 +11,26 @@ CFLAGS := -Wall -Os -DF_CPU=16000000UL -mmcu=atmega328p
 
 .PHONY: all
 
-all: $(BIN_DIR) compile
+all: $(BIN_DIR) $(BIN_DIR)/main.hex
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) \
 		-c $< -o $@
-	@echo ""
 
-compile: $(OBJS)
+$(BIN_DIR)/main.elf: $(OBJS)
 	$(CC) $(CFLAGS) \
 		-o $(BIN_DIR)/main.elf $(OBJS)
-	@echo ""
+
+$(BIN_DIR)/main.hex: $(BIN_DIR)/main.elf
 	avr-objcopy -O ihex -R .eeprom $(BIN_DIR)/main.elf $(BIN_DIR)/main.hex
 
-upload: compile
+upload: $(BIN_DIR)/main.hex
 	avrdude -F -V -c arduino -p ATMEGA328P \
 		-P $(PORT) -b 115200 -U flash:w:$(BIN_DIR)/main.hex
 
 $(BIN_DIR):
-	@if [ ! -d "$(BIN_DIR)" ]; then          \
-		echo "Creating folder '$(BIN_DIR)'"; \
-		mkdir -p $(BIN_DIR);                 \
+	@if [ ! -d "$(BIN_DIR)" ]; then \
+		mkdir -pv $(BIN_DIR);       \
 	fi
 
 size:
