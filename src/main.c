@@ -17,10 +17,10 @@ void toggle_led_2(void) {
 void setup(void) {
     DDRD |= (1 << LED_1_PIN) | (1 << LED_2_PIN);
 
-    scheduler_init(tasks, tasks_cnt);
+    scheduler_init();
 
-    // scheduler_append_task(&toggle_led_1, 1000);
-    // scheduler_append_task(&toggle_led_2, 500);
+    scheduler_append_task(&toggle_led_1, 1000);
+    scheduler_append_task(&toggle_led_2, 500);
 
     timer_init();
     timer_add_callback(&scheduler_update);
