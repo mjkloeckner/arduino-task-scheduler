@@ -1,14 +1,13 @@
 PORT ?= /dev/ttyUSB0
 BIN_DIR = bin
 SRC_DIR = src
-INC_DIR = include
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
-LIBS := $(INC_DIR/*.h)
+LIBS := $(SRC_DIR/*.h)
 OBJS := $(patsubst $(SRC_DIR)/%.c,$(BIN_DIR)/%.o,$(SRCS))
 
 CC := avr-gcc
-CFLAGS := -Wall -Os -DF_CPU=16000000UL -mmcu=atmega328p -I ./$(INC_DIR)
+CFLAGS := -Wall -Os -DF_CPU=16000000UL -mmcu=atmega328p
 
 .PHONY: all
 
