@@ -5,8 +5,7 @@ extern "C" {
 #endif
 
 typedef struct {
-    uint32_t t_ms_dt;
-    uint8_t task_cnt;
+    uint8_t task_cnt, update_cnt;
     task_t *tasks;
 } scheduler_t;
 
@@ -17,13 +16,17 @@ void scheduler_init(task_t *tasks, uint8_t task_count) {
     scheduler.task_cnt = task_count;
 }
 
+void scheduler_inc_update_tick(void) {
+    scheduler.update_cnt += (scheduler.update_cnt == 255 ? 0 : 1);
+}
+
 // update every 1 ms
-void scheduler_update(uint32_t t_ms) {
-    if ((t_ms - scheduler.t_ms_dt) < 1) {
+void scheduler_update(void) {
+    if (scheduler.update_cnt == 0) {
         return;
     }
 
-    scheduler.t_ms_dt = t_ms;
+    scheduler.update_cnt--;
 
     for (uint8_t i = 0; i < scheduler.task_cnt; ++i) {
         if (scheduler.tasks[i].ticks > 1) {

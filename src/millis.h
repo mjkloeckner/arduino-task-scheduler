@@ -7,7 +7,7 @@ extern "C" {
 
 #include <stdint.h>
 
-void millis_init(void);
+void millis_init(void (*callback)(void));
 uint32_t millis(void);
 
 #ifdef __cplusplus

@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include <stddef.h>
 
 #include "millis.h"
 #include "scheduler.h"
@@ -42,11 +43,11 @@ void io_setup(void) {
 int main(void) {
     io_setup();
 
-    millis_init();
+    millis_init(&scheduler_inc_update_tick);
     scheduler_init(tasks, sizeof(tasks)/sizeof(tasks[0]));
 
     while(1) {
-        scheduler_update(millis());
+        scheduler_update();
     }
 
     return 0;

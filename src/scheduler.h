@@ -15,7 +15,8 @@ typedef struct {
 } task_t;
 
 void scheduler_init(task_t *tasks, uint8_t task_count);
-void scheduler_update(uint32_t t_ms);
+void scheduler_update(void);
+void scheduler_inc_update_tick(void);
 void scheduler_set_task_period(uint8_t task_id, uint16_t new_period);
 
 #ifdef __cplusplus
