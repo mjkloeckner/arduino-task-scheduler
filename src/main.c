@@ -44,7 +44,7 @@ void io_setup(void) {
 int main(void) {
     io_setup();
 
-    millis_init(&scheduler_update_tick);
+    millis_init(&scheduler_tick);
 
     scheduler_init(tasks, sizeof(tasks)/sizeof(tasks[0]));
 

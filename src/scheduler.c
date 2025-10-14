@@ -16,7 +16,7 @@ void scheduler_init(task_t *tasks, uint8_t task_count) {
     scheduler.task_cnt = task_count;
 }
 
-void scheduler_update_tick(void) {
+void scheduler_tick(void) {
     scheduler.update_cnt += (scheduler.update_cnt == 255 ? 0 : 1);
 }
 
