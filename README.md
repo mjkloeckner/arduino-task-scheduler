@@ -1,8 +1,8 @@
 # Arduino Bare Metal Task Scheduler
 
-This is a simple program which implements a task scheduler. What this does is
-basically execute the series of task attached to the scheduler after the
-specified task period in ms have passed.
+This is a simple program that implements a task scheduler. It executes a series
+of tasks attached to the scheduler after their specified task period (in
+milliseconds) has passed.
 
 In the example four leds controlled, two blinking at different rates and two
 controlled by buttons.
