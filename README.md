@@ -1,7 +1,8 @@
-# Arduino Bare Metal Task Scheduler
+# AVR Bare Metal Task Scheduler
 
-This is a simple program that implements a task scheduler. It executes a series
-of tasks attached to the scheduler after their specified task period has passed
+This is a simple program that implements a task scheduler for avr based mcus,
+in particular ATmega328. It executes a series of tasks attached to the
+scheduler after their specified task period has passed
 
 ## In this example
 
